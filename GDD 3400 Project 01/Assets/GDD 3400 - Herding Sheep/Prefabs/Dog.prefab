@@ -61,6 +61,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +84,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -132,15 +135,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e48f9857b3b40268cc78ef25ba5c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetsLayer:
+  safeZone: {x: 0, y: 0, z: 0}
+  target: {fileID: 2840215877688325365, guid: 565ba3fe8549f48c29c1ade63be85124, type: 3}
+  minDistance: 0
+  _targetsLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _obstaclesLayer:
     serializedVersion: 2
     m_Bits: 0
-  obstaclesLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  friendTag: Friend
-  threatTag: Thread
-  safeZoneTag: SafeZone
+  patrolPoints:
+  - {fileID: 1168065891911351103, guid: 780a6ee67d4e19841a9624ca36afbb35, type: 3}
+  - {fileID: 7555555818371928355, guid: cd113fe430a20f149ac9eddd7490d442, type: 3}
+  - {fileID: 5216732977632941549, guid: 2d4c4da45b7fa234591de0f06d0da6b3, type: 3}
+  waitTime: 2
+  speed: 2
 --- !u!1 &4259236394591651595
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +245,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -257,6 +268,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -377,6 +389,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -398,6 +412,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
