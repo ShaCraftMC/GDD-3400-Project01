@@ -18,10 +18,7 @@ namespace GDD3400.Project01
         private float _maxSpeed = 5f;
         private float _sightRadius = 7.5f;
         //My Own
-        public Vector3 safeZone;
-        public Transform target;
-        public float minDistance;
-        public Vector3 ranDirection;
+        Vector3 savedPosition;
         bool onPatrol = true;
 
         // Layers - Set In Project Settings
@@ -43,7 +40,10 @@ namespace GDD3400.Project01
             _targetsLayer = LayerMask.GetMask("Targets");
             _obstaclesLayer = LayerMask.GetMask("Obstacles");
             //Get our spawn location, which is the safe zone and save for future
-            safeZone = transform.position;
+            GameObject safeZone = GameObject.FindGameObjectWithTag("SafeZone");
+
+            //Set safeZone location
+            savedPosition = safeZone.transform.position;
 
 
 
