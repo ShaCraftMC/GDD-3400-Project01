@@ -99,9 +99,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2471741539017510992}
   - component: {fileID: 4807236908242575682}
+  - component: {fileID: 3064450866483461386}
+  - component: {fileID: 1393623246253809527}
   m_Layer: 6
   m_Name: Dog
-  m_TagString: Untagged
+  m_TagString: Threat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,21 +137,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e48f9857b3b40268cc78ef25ba5c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  safeZone: {x: 0, y: 0, z: 0}
-  target: {fileID: 2840215877688325365, guid: 565ba3fe8549f48c29c1ade63be85124, type: 3}
-  minDistance: 0
   _targetsLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   _obstaclesLayer:
     serializedVersion: 2
     m_Bits: 0
-  patrolPoints:
-  - {fileID: 1168065891911351103, guid: 780a6ee67d4e19841a9624ca36afbb35, type: 3}
-  - {fileID: 7555555818371928355, guid: cd113fe430a20f149ac9eddd7490d442, type: 3}
-  - {fileID: 5216732977632941549, guid: 2d4c4da45b7fa234591de0f06d0da6b3, type: 3}
-  waitTime: 2
-  speed: 2
+--- !u!54 &3064450866483461386
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4138906190388369890}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0
+--- !u!135 &1393623246253809527
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4138906190388369890}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4259236394591651595
 GameObject:
   m_ObjectHideFlags: 0
