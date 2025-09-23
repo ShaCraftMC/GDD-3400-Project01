@@ -26,6 +26,7 @@ namespace GDD3400.Project01
         //My Own
         Vector3 savedPosition;
         bool onPatrol = true;
+        bool onHerding = false;
         //Vector3 ranDirection;
         Rigidbody rb3d;
         private float maxRotation = 90f;
@@ -55,7 +56,9 @@ namespace GDD3400.Project01
             //Freeze rotation for time being so physics doesn't mess with our rotation
             rb3d.freezeRotation = true;
             //Get our spawn location, which is the safe zone and save for future
-            GameObject safeZone = GameObject.FindGameObjectWithTag("SafeZone");
+            //GameObject safeZone = GameObject.FindGameObjectWithTag("SafeZone");
+            Vector3 safeZone; 
+            safeZone = transform.position;
             onPatrol = true;
 
             StartCoroutine("Wandering");
@@ -84,6 +87,11 @@ namespace GDD3400.Project01
             {
                 Patroling();
             }
+            else if (onHerding)
+            {
+                Herding();
+            }
+            //if dog is doing nothing, stop all coroutines
             else
             {
                 StopCoroutine("Wandering");
@@ -91,11 +99,13 @@ namespace GDD3400.Project01
             
         }
 
+        //Wandering Coroutine
         IEnumerator Wandering()
         {
             while (true)
             {
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(2);
+
                 DecisionMaking();
             }
 
@@ -113,6 +123,7 @@ namespace GDD3400.Project01
 
         }
 
+        //Bulk code for the patroling function of the dog
         public void Patroling()
         {
             //For testing purposes
@@ -149,6 +160,12 @@ namespace GDD3400.Project01
 
         }
 
+        public void Herding()
+        {
+            transform.position = safeZone.transform.position;
+        }
+
+        //Translate our turn from degrees to radians, so Unity can use it
         private Vector3 OrientationToVector(float angleDegress)
         {
             float radians = angleDegress * Mathf.Deg2Rad;

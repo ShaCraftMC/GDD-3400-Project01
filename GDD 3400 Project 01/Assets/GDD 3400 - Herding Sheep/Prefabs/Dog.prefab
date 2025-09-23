@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1393623246253809527}
   m_Layer: 6
   m_Name: Dog
-  m_TagString: Threat
+  m_TagString: Friend
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
