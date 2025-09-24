@@ -221,7 +221,7 @@ namespace GDD3400.Project01
                 wanderCount = 0;
             }
             //wanderCount is our timer for our herding, so after a certain point, dog goes back to wander
-            wanderCount = wanderCount - 2f;
+            wanderCount = wanderCount - 1.5f;
             
             
         }
