@@ -89,7 +89,7 @@ namespace GDD3400.Project01
             if (!_isActive) return;
 
             Perception();
-            DetectObjectsInRadius();
+            //DetectObjectsInRadius();
             //DecisionMaking();
             //Look for objects in range with specific tag;
 
@@ -161,7 +161,7 @@ namespace GDD3400.Project01
         {
             speed = 3;
             //Transform child = transform.Find("Friend");
-            transform.Find("Collision").tag = "Threat";
+            transform.Find("Collision").tag = "Friend";
             //print(child.tag);
 
             //Code for Wandering
@@ -204,7 +204,6 @@ namespace GDD3400.Project01
         {
             //reduce our speed, and set our tag to friend, so sheep will flock
             speed = 2;
-            wanderCount = 10;
             transform.Find("Collision").tag = "Friend";
             //Force dog to look at the safeZone;
             transform.LookAt(safeZone);
@@ -257,7 +256,9 @@ namespace GDD3400.Project01
             return new Vector3(Mathf.Sin(radians), 0, Mathf.Cos(radians));
         }
 
+        
         //Not working as intended
+        
         void DetectObjectsInRadius()
         {
             //_sightRadius = _sightRadius - 5;
@@ -272,6 +273,8 @@ namespace GDD3400.Project01
                     onPatrol = false;
                     onHerding = true;
                 }
+        
+       
                 /*
                 else if (collider.CompareTag("SafeZone"))
                 {
@@ -282,12 +285,22 @@ namespace GDD3400.Project01
                 */
             }
             /*
-            if (colliders.Length <= 0)
+            if (colliders.Length <= 0)`
             {
                 onPatrol = true;
                 onHerding = false;
             }
             */
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Friend"))
+            {
+                onPatrol = false;
+                onHerding = true;
+            }
+
         }
     }
 
