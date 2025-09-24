@@ -161,7 +161,7 @@ namespace GDD3400.Project01
         {
             speed = 3;
             //Transform child = transform.Find("Friend");
-            transform.Find("Collision").tag = "Friend";
+            transform.Find("Collision").tag = "Threat";
             //print(child.tag);
 
             //Code for Wandering
