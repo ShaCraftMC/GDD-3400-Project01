@@ -218,6 +218,7 @@ namespace GDD3400.Project01
             {
                 onPatrol = true;
                 onHerding = false;
+                wanderCount = 0;
             }
             //wanderCount is our timer for our herding, so after a certain point, dog goes back to wander
             wanderCount = wanderCount - 2f;
