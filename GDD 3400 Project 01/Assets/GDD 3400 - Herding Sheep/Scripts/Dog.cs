@@ -24,7 +24,7 @@ namespace GDD3400.Project01
         private float _sightRadius = 7.5f;
         //Temp spd var
         private float speed = 3f;
-        
+
         //My Own
         Vector3 savedPosition;
         bool onPatrol = false;
@@ -34,7 +34,7 @@ namespace GDD3400.Project01
         Rigidbody rb3d;
         private float maxRotation = 90f;
         private float orientation = 0f;
-        bool firstTime = false;
+        bool firstTime = true;
         Vector3 safeZone;
         float wanderCount;
         float count = 8f;
@@ -51,7 +51,7 @@ namespace GDD3400.Project01
         private string safeZoneTag = "SafeZone";
 
 
-        
+
         public void Awake()
         {
             // Find the layers in the project settings
@@ -63,23 +63,25 @@ namespace GDD3400.Project01
             rb3d.freezeRotation = true;
             //Get our spawn location, which is the safe zone and save for future
             //GameObject safeZone = GameObject.FindGameObjectWithTag("SafeZone"); 
-            onPatrol = false;
-            onHerding = true;
+            StartCoroutine("Wandering");
+            onPatrol = true;
+            onHerding = false;
             onStraight = false;
             wanderCount = 0;
 
             //Set tag of dog to initially of "threat"
-            transform.Find("Collision").tag = "Threat";
+            //transform.Find("Collision").tag = "Threat";
 
-            StartCoroutine("Wandering");
+            
         }
 
         public void Start()
         {
             //Save safeZone position
             safeZone = transform.position;
-            
-            
+            transform.Find("Collision").tag = "Threat";
+            _sightRadius = 1;
+
         }
 
         private void Update()
@@ -87,7 +89,11 @@ namespace GDD3400.Project01
             if (!_isActive) return;
 
             Perception();
+            DetectObjectsInRadius();
             //DecisionMaking();
+            //Look for objects in range with specific tag;
+
+
 
 
         }
@@ -99,22 +105,23 @@ namespace GDD3400.Project01
 
         private void DecisionMaking()
         {
+
             //print(gameObject.tag);
             //Start patroling
             if (onPatrol)
             {
                 Patroling();
             }
+            
             else if (onHerding)
             {
-                //StopCoroutine("Wandering");
-
                 Herding();
             }
+            
             else if (onStraight)
             {
-                Straight();
-                
+                //Straight();
+
             }
             //if dog is doing nothing, stop all coroutines
             else
@@ -122,6 +129,7 @@ namespace GDD3400.Project01
                 StopCoroutine("Wandering");
             }
             count--;
+            
 
 
         }
@@ -135,8 +143,6 @@ namespace GDD3400.Project01
 
                 DecisionMaking();
             }
-
-            //Patroling();
         }
 
         /// <summary>
@@ -146,7 +152,7 @@ namespace GDD3400.Project01
         private void FixedUpdate()
         {
             if (!_isActive) return;
-            
+
 
         }
 
@@ -155,7 +161,7 @@ namespace GDD3400.Project01
         {
             speed = 3;
             //Transform child = transform.Find("Friend");
-            transform.Find("Collision").tag = "Threat";
+            transform.Find("Collision").tag = "Friend";
             //print(child.tag);
 
             //Code for Wandering
@@ -179,6 +185,7 @@ namespace GDD3400.Project01
             }
 
             //If the Patroling() has fired atleast 6 times, set velocity to zero,and start the herding method
+            
             if (wanderCount >= 6)
             {
                 rb3d.linearVelocity = Vector3.zero;
@@ -186,6 +193,8 @@ namespace GDD3400.Project01
                 onHerding = true;
             }
             wanderCount++;
+            
+            
 
 
         }
@@ -195,6 +204,7 @@ namespace GDD3400.Project01
         {
             //reduce our speed, and set our tag to friend, so sheep will flock
             speed = 2;
+            wanderCount = 10;
             transform.Find("Collision").tag = "Friend";
             //Force dog to look at the safeZone;
             transform.LookAt(safeZone);
@@ -203,6 +213,7 @@ namespace GDD3400.Project01
             rb3d.linearVelocity = direction * speed;
 
 
+            
             //If wanderCount <= 0, end herding, and begin patroling again
             if (wanderCount <= 0)
             {
@@ -210,12 +221,15 @@ namespace GDD3400.Project01
                 onHerding = false;
             }
             //wanderCount is our timer for our herding, so after a certain point, dog goes back to wander
-            wanderCount = wanderCount - 0.5f;
+            wanderCount = wanderCount - 2f;
+            
+            
         }
 
 
 
         //Currently working on, goal is to go straight out, then stop, and start the onPatroling()
+        /*
         public void Straight()
         {
             speed = 5;
@@ -223,25 +237,58 @@ namespace GDD3400.Project01
             Vector3 direction = (-transform.position - transform.position).normalized;
             rb3d.linearVelocity = direction * speed;
 
-            
+
             onStraight = false;
 
             if (count <= 0)
             {
                 rb3d.linearVelocity = Vector3.zero;
                 onPatrol = true;
-                
+
             }
-            
+
         }
+        */
 
         //Translate our turn from degrees to radians, so Unity can use it
         private Vector3 OrientationToVector(float angleDegress)
         {
             float radians = angleDegress * Mathf.Deg2Rad;
-            return new Vector3(Mathf.Sin(radians),0, Mathf.Cos(radians));
+            return new Vector3(Mathf.Sin(radians), 0, Mathf.Cos(radians));
         }
-        
+
+        //Not working as intended
+        void DetectObjectsInRadius()
+        {
+            //_sightRadius = _sightRadius - 5;
+            // Get all colliders within the radius
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _sightRadius);
+
+            foreach (Collider collider in colliders)
+            {
+                // Check if the object has the specified tag
+                if (collider.CompareTag("Friend"))
+                {
+                    onPatrol = false;
+                    onHerding = true;
+                }
+                /*
+                else if (collider.CompareTag("SafeZone"))
+                {
+                    onHerding = false;
+                    onPatrol = true;
+
+                }  
+                */
+            }
+            /*
+            if (colliders.Length <= 0)
+            {
+                onPatrol = true;
+                onHerding = false;
+            }
+            */
+        }
     }
 
 }
