@@ -27,8 +27,9 @@ namespace GDD3400.Project01
         
         //My Own
         Vector3 savedPosition;
-        bool onPatrol = true;
+        bool onPatrol = false;
         bool onHerding = false;
+        bool onStraight = false;
         //Vector3 ranDirection;
         Rigidbody rb3d;
         private float maxRotation = 90f;
@@ -36,6 +37,7 @@ namespace GDD3400.Project01
         bool firstTime = false;
         Vector3 safeZone;
         float wanderCount;
+        float count = 8f;
 
 
 
@@ -61,16 +63,22 @@ namespace GDD3400.Project01
             rb3d.freezeRotation = true;
             //Get our spawn location, which is the safe zone and save for future
             //GameObject safeZone = GameObject.FindGameObjectWithTag("SafeZone"); 
-            onPatrol = true;
-            onHerding = false;
+            onPatrol = false;
+            onHerding = true;
+            onStraight = false;
             wanderCount = 0;
+
+            //Set tag of dog to initially of "threat"
+            transform.Find("Collision").tag = "Threat";
 
             StartCoroutine("Wandering");
         }
 
         public void Start()
         {
+            //Save safeZone position
             safeZone = transform.position;
+            
             
         }
 
@@ -103,15 +111,22 @@ namespace GDD3400.Project01
 
                 Herding();
             }
+            else if (onStraight)
+            {
+                Straight();
+                
+            }
             //if dog is doing nothing, stop all coroutines
             else
             {
                 StopCoroutine("Wandering");
             }
-            
+            count--;
+
+
         }
 
-        //Wandering Coroutine
+        //Wandering Coroutine (Used to constantly fire the behavior for right now)
         IEnumerator Wandering()
         {
             while (true)
@@ -138,9 +153,8 @@ namespace GDD3400.Project01
         //Bulk code for the patroling function of the dog
         public void Patroling()
         {
-
+            speed = 3;
             //Transform child = transform.Find("Friend");
-            //Debugging
             transform.Find("Collision").tag = "Threat";
             //print(child.tag);
 
@@ -151,17 +165,12 @@ namespace GDD3400.Project01
 
             //Safe guard to make sure our rotation is strictly between 0 - 360
             orientation = Mathf.Repeat(orientation, 360);
-
-            if (firstTime)
-            {
-                firstTime = false;
-                orientation = 0;
-            }
             //Convert our orentation value to direction value so our dog can use it
             //Using a method setup to convert
 
             Vector3 direction = OrientationToVector(orientation);
 
+            //Set velocity with direction
             rb3d.linearVelocity = direction * speed;
 
             if (direction != Vector3.zero)
@@ -169,6 +178,7 @@ namespace GDD3400.Project01
                 rb3d.MoveRotation(Quaternion.LookRotation(direction));
             }
 
+            //If the Patroling() has fired atleast 6 times, set velocity to zero,and start the herding method
             if (wanderCount >= 6)
             {
                 rb3d.linearVelocity = Vector3.zero;
@@ -180,30 +190,49 @@ namespace GDD3400.Project01
 
         }
 
+        //Herding function behavior
         public void Herding()
         {
+            //reduce our speed, and set our tag to friend, so sheep will flock
+            speed = 2;
+            transform.Find("Collision").tag = "Friend";
             //Force dog to look at the safeZone;
             transform.LookAt(safeZone);
+            //Go to the safezone
             Vector3 direction = (safeZone - transform.position).normalized;
             rb3d.linearVelocity = direction * speed;
 
 
+            //If wanderCount <= 0, end herding, and begin patroling again
             if (wanderCount <= 0)
             {
                 onPatrol = true;
                 onHerding = false;
             }
-            else if (wanderCount == 2 || wanderCount == 3)
-            {
-                transform.Find("Collision").tag = "Friend";
-            }
             //wanderCount is our timer for our herding, so after a certain point, dog goes back to wander
-            wanderCount = wanderCount - 2;
+            wanderCount = wanderCount - 0.5f;
         }
 
+
+
+        //Currently working on, goal is to go straight out, then stop, and start the onPatroling()
         public void Straight()
         {
-            //rb3d.linearVelocity =
+            speed = 5;
+            transform.LookAt(-transform.position);
+            Vector3 direction = (-transform.position - transform.position).normalized;
+            rb3d.linearVelocity = direction * speed;
+
+            
+            onStraight = false;
+
+            if (count <= 0)
+            {
+                rb3d.linearVelocity = Vector3.zero;
+                onPatrol = true;
+                
+            }
+            
         }
 
         //Translate our turn from degrees to radians, so Unity can use it
