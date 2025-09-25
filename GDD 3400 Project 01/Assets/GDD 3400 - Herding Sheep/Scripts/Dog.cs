@@ -91,7 +91,7 @@ namespace GDD3400.Project01
             Perception();
             //DetectObjectsInRadius();
             //DecisionMaking();
-            //Look for objects in range with specific tag;
+            
 
 
 
@@ -221,7 +221,7 @@ namespace GDD3400.Project01
                 wanderCount = 0;
             }
             //wanderCount is our timer for our herding, so after a certain point, dog goes back to wander
-            wanderCount = wanderCount - 1.5f;
+            wanderCount = wanderCount - 1f;
             
             
         }
@@ -262,7 +262,6 @@ namespace GDD3400.Project01
         
         void DetectObjectsInRadius()
         {
-            //_sightRadius = _sightRadius - 5;
             // Get all colliders within the radius
             Collider[] colliders = Physics.OverlapSphere(transform.position, _sightRadius);
 
@@ -274,26 +273,12 @@ namespace GDD3400.Project01
                     onPatrol = false;
                     onHerding = true;
                 }
-        
-       
-                /*
-                else if (collider.CompareTag("SafeZone"))
-                {
-                    onHerding = false;
-                    onPatrol = true;
 
-                }  
-                */
-            }
-            /*
-            if (colliders.Length <= 0)`
-            {
-                onPatrol = true;
-                onHerding = false;
-            }
-            */
+
+            }  
         }
 
+        //Working using a collider on the sheep
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Friend"))
@@ -306,80 +291,6 @@ namespace GDD3400.Project01
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        //Patroling Variables
-        public Transform[] patrolPoints;
-        public float waitTime;
-        int currentPointIndex;
-        public float speed = 5;
-        bool once = false;
-        */
-
-        /*
-        void Update()
-        {
-            if (transform.position != patrolPoints[currentPointIndex].transform.position)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPointIndex].position, speed * Time.deltaTime);
-            }
-            else
-            {
-                if (once == false)
-                {
-                    once = true;
-                    StartCoroutine(Wait());
-                }
-
-            }
-        }
-
-        IEnumerator Wait()
-        {
-            yield return new WaitForSeconds(waitTime);
-            if (currentPointIndex + 1 < patrolPoints.Length)
-            {
-                currentPointIndex++;
-            }
-            else
-            {
-                currentPointIndex = 0;
-            }
-            once = false;
-        */
-            //Follow Code
-            /*
-            private void Update()
-            {
-                if (Vector2.Distance(transform.position, target.position) > minDistance)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, target.position, _maxSpeed * Time.deltaTime);
-                }
-
-            }
-            */
 
 
 
