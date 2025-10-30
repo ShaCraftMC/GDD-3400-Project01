@@ -12,6 +12,7 @@ namespace  GDD3400.Labyrinth
         [SerializeField] private float _MoveSpeed = 10;
         [SerializeField] private float _DashDistance = 2.5f;
         [SerializeField] private float _DashCooldown = 1.5f;
+        [SerializeField] public GameObject barrel;
 
         [Header("Connections")]
         [SerializeField] private Transform _GraphicsRoot;
@@ -43,6 +44,17 @@ namespace  GDD3400.Labyrinth
 
             // If the dash is available and pressed this frame, perform the dash
             //if (!_isDashing && _dashAction.WasPressedThisFrame()) PerformDash();
+
+            //Player can place barrels to block the Enemy Agent
+            //Place down Obstacles
+            if (Input.GetMouseButtonDown(1))
+            {
+                //Debug.Log("Hi");
+                Vector3 mousePos = Input.mousePosition;
+                mousePos.z = 10;
+                Vector3 worldPos = Camera.main.WorldToScreenPoint(mousePos);
+                Instantiate(barrel, worldPos, Quaternion.identity);
+            }
         }
 
         private void FixedUpdate()

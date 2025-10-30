@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -21,14 +21,14 @@ namespace GDD3400.Labyrinth
         [SerializeField] private float _SightDistance = 25f;
 
         [SerializeField] private float _StoppingDistance = 1.5f;
-        
+
         [Tooltip("The distance to the destination before we start leaving the path")]
         [SerializeField] private float _LeavingPathDistance = 2f; // This should not be less than 1
 
         [Tooltip("The minimum distance to the destination before we start using the pathfinder")]
         [SerializeField] private float _MinimumPathDistance = 6f;
 
-       
+
 
         private Vector3 _velocity;
         private Vector3 _floatingTarget;
@@ -40,6 +40,14 @@ namespace GDD3400.Labyrinth
         private LayerMask _wallLayer;
 
         private bool DEBUG_SHOW_PATH = true;
+
+
+        //Line of Sight
+        public Transform player;
+        public float viewRange = 10f;
+        public float viewAngle = 90f;
+        public float eyeHeight = 1.5f;
+        public bool canSeePlayer;
 
 
         public void Awake()
@@ -66,11 +74,22 @@ namespace GDD3400.Labyrinth
 
             Perception();
             DecisionMaking();
+            //Check to see if Player is within line of sight
+            CheckLineOfSight();
         }
 
         private void Perception()
         {
-            // TODO: Implement perception            
+            // TODO: Implement perception
+            if (canSeePlayer)
+            {
+                //Run the chase method
+                Chase();
+            }
+            else
+            {
+                //Continue path finding & wandering
+            }
         }
 
         private void DecisionMaking()
@@ -128,7 +147,7 @@ namespace GDD3400.Labyrinth
                 _floatingTarget = destination;
             }
         }
-        
+
         // Get the closest node to the player's current position
         private int GetClosestNode()
         {
@@ -164,7 +183,7 @@ namespace GDD3400.Labyrinth
                 Vector3 direction = (_floatingTarget - transform.position).normalized;
 
                 // Calculate the movement vector
-                _velocity = direction * _MaxSpeed;                
+                _velocity = direction * _MaxSpeed;
             }
 
             // If we are close enough to the floating target, slow down
@@ -193,6 +212,54 @@ namespace GDD3400.Labyrinth
                 Debug.DrawLine(path[i].transform.position, path[i + 1].transform.position, Color.red, 3.5f);
                 yield return new WaitForSeconds(0.1f);
             }
+        }
+
+
+        // Code create with the use of my code, and assistance from ChatGPT
+        //I.e I started with some code, couldn't get it working asked for help, understood it, and repeated.
+        void CheckLineOfSight()
+        {
+            canSeePlayer = false;
+
+            Vector3 directionToPlayer = (player.position - transform.position).normalized;
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            // 1️⃣ Distance Check
+            if (distanceToPlayer < viewRange)
+            {
+                // 2️⃣ Angle Check
+                float angle = Vector3.Angle(transform.forward, directionToPlayer);
+                if (angle < viewAngle / 2f)
+                {
+                    // 3️⃣ Raycast Check
+                    if (Physics.Raycast(transform.position + Vector3.up * eyeHeight, directionToPlayer, out RaycastHit hit, viewRange))
+                    {
+                        if (hit.transform.CompareTag("Player"))
+                        {
+                            canSeePlayer = true;
+                            //Debug raycasts for now while I setup line of sights
+                            Debug.DrawLine(transform.position + Vector3.up * eyeHeight, hit.point, Color.green);
+                            return;
+                        }
+                        else
+                        {
+                            //Debug raycast for now while I setup code
+                            Debug.DrawLine(transform.position + Vector3.up * eyeHeight, hit.point, Color.red);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        //Chase Method
+        void Chase()
+        {
+            Vector3 directionToPlayer = (player.position - transform.position).normalized;
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+
+
         }
     }
 }
