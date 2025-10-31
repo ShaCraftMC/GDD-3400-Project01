@@ -90,6 +90,7 @@ namespace GDD3400.Labyrinth
             else
             {
                 //Continue path finding & wandering
+                Search();
             }
         }
 
@@ -270,10 +271,11 @@ namespace GDD3400.Labyrinth
 
 
 
-        //Wandering Method
-        void Wander()
+        //Searching Method
+        void Search()
         {
             //Wandering code here
+
         }
     }
 }
