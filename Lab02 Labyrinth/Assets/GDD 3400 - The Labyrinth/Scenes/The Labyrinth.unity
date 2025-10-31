@@ -2282,7 +2282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &455497777
@@ -9465,11 +9465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34ba4485e4848049866bc7bc16ac57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1807184092 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
-  m_PrefabInstance: {fileID: 3976002124591530154}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1812326197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11216,7 +11211,7 @@ PrefabInstance:
     - target: {fileID: 3755972776847136331, guid: e2b961e7ac0504d1a84874975b4d4959, type: 3}
       propertyPath: _Target
       value: 
-      objectReference: {fileID: 1807184092}
+      objectReference: {fileID: 50431081}
     - target: {fileID: 4823029691932891821, guid: e2b961e7ac0504d1a84874975b4d4959, type: 3}
       propertyPath: m_Name
       value: Tracking Camera
