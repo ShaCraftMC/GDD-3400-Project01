@@ -74,7 +74,8 @@ namespace GDD3400.Labyrinth
 
             Perception();
             DecisionMaking();
-            //Check to see if Player is within line of sight
+            //Check to see if Player is within line of sight if he is within light of sight, while this is running,
+            //it will activate the bool of canSeePlayer.
             CheckLineOfSight();
         }
 
@@ -219,21 +220,22 @@ namespace GDD3400.Labyrinth
         //I.e I started with some code, couldn't get it working asked for help, understood it, and repeated.
         void CheckLineOfSight()
         {
-            canSeePlayer = false;
+            //canSeePlayer = false;
 
             Vector3 directionToPlayer = (player.position - transform.position).normalized;
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            // 1️⃣ Distance Check
+            // 1) Distance Check
             if (distanceToPlayer < viewRange)
             {
-                // 2️⃣ Angle Check
+                // 2) Angle Check
                 float angle = Vector3.Angle(transform.forward, directionToPlayer);
                 if (angle < viewAngle / 2f)
                 {
-                    // 3️⃣ Raycast Check
+                    // 3) Raycast Check
                     if (Physics.Raycast(transform.position + Vector3.up * eyeHeight, directionToPlayer, out RaycastHit hit, viewRange))
                     {
+                        // 4) Tag Check
                         if (hit.transform.CompareTag("Player"))
                         {
                             canSeePlayer = true;
@@ -243,7 +245,9 @@ namespace GDD3400.Labyrinth
                         }
                         else
                         {
+                            canSeePlayer = false;
                             //Debug raycast for now while I setup code
+                            //AkA there is a player, in sight, but he is behind an obstacle, so AI reports there is no player
                             Debug.DrawLine(transform.position + Vector3.up * eyeHeight, hit.point, Color.red);
                         }
                     }
@@ -258,8 +262,18 @@ namespace GDD3400.Labyrinth
             Vector3 directionToPlayer = (player.position - transform.position).normalized;
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
+            //Set the destination to the current player location, then path find using the nodes.
+            SetDestinationTarget(player.position);
 
 
+        }
+
+
+
+        //Wandering Method
+        void Wander()
+        {
+            //Wandering code here
         }
     }
 }
