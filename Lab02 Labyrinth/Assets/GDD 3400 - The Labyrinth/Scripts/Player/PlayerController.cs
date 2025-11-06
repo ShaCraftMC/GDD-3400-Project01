@@ -50,10 +50,20 @@ namespace  GDD3400.Labyrinth
             if (Input.GetMouseButtonDown(1))
             {
                 //Debug.Log("Hi");
-                Vector3 mousePos = Input.mousePosition;
-                mousePos.z = 10;
-                Vector3 worldPos = Camera.main.WorldToScreenPoint(mousePos);
-                Instantiate(barrel, worldPos, Quaternion.identity);
+                //Vector3 mousePos = Input.mousePosition;
+                //mousePos.z = 10;
+                //Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if(Physics.Raycast(ray, out hit,100))
+                {
+                    if (hit.collider.CompareTag("Floor"))
+                    {
+                        Instantiate(barrel, hit.point, Quaternion.identity);
+                    }
+                    
+                }
+                
             }
         }
 

@@ -55,8 +55,10 @@ namespace GDD3400.Labyrinth
         Vector3 randomPoint;
 
         //Timer
-        public float timeRemaining = 4f;
+        public float timeRemaining = 2f;
         public bool timerIsRunning = false;
+
+        Vector3 lastKnownPosition;
 
 
 
@@ -91,14 +93,7 @@ namespace GDD3400.Labyrinth
 
         private void Perception()
         {
-            //Cached for now
-            /*
-            if (gameObject.transform.position == randomPoint)
-            {
-                notSearching = true;
-            }
-            */
-
+            
             // TODO: Implement perception
             if (canSeePlayer)
             {
@@ -112,6 +107,7 @@ namespace GDD3400.Labyrinth
                 Search();
             }
 
+            //wandering timer
             if (timerIsRunning)
             {
                 if (timeRemaining > 0)
@@ -122,12 +118,32 @@ namespace GDD3400.Labyrinth
                 else
                 {
                     
-                    timeRemaining = 0;
+                    timeRemaining = 2f;
                     timerIsRunning = false;
                     notSearching = true;
                 }
             }
+
+            //Have a timer or Ienumarator that after loosing sight of the player, go to their last position, then go back to wandering
+            /*
+            if (timerIsRunningTwo)
+            {
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+
+                }
+                else
+                {
+
+                    timeRemaining = 2f;
+                    
+                }
+            }
+            */
         }
+
+        //IEnumerator 
 
         private void DecisionMaking()
         {
@@ -256,6 +272,7 @@ namespace GDD3400.Labyrinth
         //I.e I started with some code, couldn't get it working asked for help, understood it, and repeated.
         void CheckLineOfSight()
         {
+            /*
             //canSeePlayer = false;
 
             Vector3 directionToPlayer = (player.position - transform.position).normalized;
@@ -288,7 +305,46 @@ namespace GDD3400.Labyrinth
                         }
                     }
                 }
+            */
+
+            //If this is added, the AI will chase the player until it goes behind wall, then it looses intrest
+            //canSeePlayer = false;
+
+            Vector3 directionToPlayer = (player.position - transform.position).normalized;
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            // 1) Distance Check (circular radius)
+            if (distanceToPlayer < viewRange)
+            {
+                // 2) Raycast Check for obstacles
+                if (Physics.Raycast(transform.position + Vector3.up * eyeHeight, directionToPlayer, out RaycastHit hit, viewRange))
+                {
+
+                    if (hit.transform.CompareTag("Player"))
+                    {
+                        lastKnownPosition = hit.transform.position;
+                        canSeePlayer = true;
+                        Debug.DrawLine(transform.position + Vector3.up * eyeHeight, hit.point, Color.green);
+                    }
+                    else
+                    {
+                        //If this is added, the AI will follow the player to ridicolus lengths even though the player isnt in sight, and other times it will drop off
+                        canSeePlayer = false;
+                        Debug.DrawLine(transform.position + Vector3.up * eyeHeight, hit.point, Color.red);
+                        
+                    }
+                }
+                else
+                {
+                    //If this is added, the AI will follow the player to ridicolus lengths even though the player isnt in sight, and other times it will drop off
+                    canSeePlayer = false;
+                    Debug.DrawLine(transform.position + Vector3.up * eyeHeight, hit.point, Color.red);
+                    
+                }
             }
+
+
+
         }
 
 
