@@ -49,6 +49,16 @@ namespace GDD3400.Labyrinth
         public float eyeHeight = 1.5f;
         public bool canSeePlayer;
 
+        //Searching support
+        public float searchRadius = 10f;
+        bool notSearching = true;
+        Vector3 randomPoint;
+
+        //Timer
+        public float timeRemaining = 4f;
+        public bool timerIsRunning = false;
+
+
 
         public void Awake()
         {
@@ -81,16 +91,41 @@ namespace GDD3400.Labyrinth
 
         private void Perception()
         {
+            //Cached for now
+            /*
+            if (gameObject.transform.position == randomPoint)
+            {
+                notSearching = true;
+            }
+            */
+
             // TODO: Implement perception
             if (canSeePlayer)
             {
                 //Run the chase method
                 Chase();
             }
-            else
+            else if (notSearching)
             {
                 //Continue path finding & wandering
+                notSearching = false;
                 Search();
+            }
+
+            if (timerIsRunning)
+            {
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+                   
+                }
+                else
+                {
+                    
+                    timeRemaining = 0;
+                    timerIsRunning = false;
+                    notSearching = true;
+                }
             }
         }
 
@@ -275,6 +310,13 @@ namespace GDD3400.Labyrinth
         void Search()
         {
             //Wandering code here
+            // Step 1: Pick a random point around the player
+            Vector3 randomDirection = Random.insideUnitSphere * searchRadius;
+            randomDirection.y = 0; // Keep it on the same horizontal plane
+            randomPoint = transform.position + randomDirection;
+            SetDestinationTarget(randomPoint);
+            timerIsRunning = true;
+
 
         }
     }
