@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace  GDD3400.Labyrinth
 {
@@ -65,6 +66,8 @@ namespace  GDD3400.Labyrinth
                 }
                 
             }
+
+            
         }
 
         private void FixedUpdate()
@@ -99,5 +102,7 @@ namespace  GDD3400.Labyrinth
             _isDashing = false;
             _rigidbody.linearVelocity = _moveVector * _MoveSpeed;
         }
+
+        
     }
 }

@@ -143,8 +143,7 @@ namespace GDD3400.Labyrinth
             */
         }
 
-        //IEnumerator 
-
+        //Decision Making
         private void DecisionMaking()
         {
             if (_path != null && _path.Count > 0)
@@ -270,45 +269,10 @@ namespace GDD3400.Labyrinth
 
         // Code create with the use of my code, and assistance from ChatGPT
         //I.e I started with some code, couldn't get it working asked for help, understood it, and repeated.
+        //Checks line of sight in a circle radius
         void CheckLineOfSight()
         {
-            /*
-            //canSeePlayer = false;
-
-            Vector3 directionToPlayer = (player.position - transform.position).normalized;
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-            // 1) Distance Check
-            if (distanceToPlayer < viewRange)
-            {
-                // 2) Angle Check
-                float angle = Vector3.Angle(transform.forward, directionToPlayer);
-                if (angle < viewAngle / 2f)
-                {
-                    // 3) Raycast Check
-                    if (Physics.Raycast(transform.position + Vector3.up * eyeHeight, directionToPlayer, out RaycastHit hit, viewRange))
-                    {
-                        // 4) Tag Check
-                        if (hit.transform.CompareTag("Player"))
-                        {
-                            canSeePlayer = true;
-                            //Debug raycasts for now while I setup line of sights
-                            Debug.DrawLine(transform.position + Vector3.up * eyeHeight, hit.point, Color.green);
-                            return;
-                        }
-                        else
-                        {
-                            canSeePlayer = false;
-                            //Debug raycast for now while I setup code
-                            //AkA there is a player, in sight, but he is behind an obstacle, so AI reports there is no player
-                            Debug.DrawLine(transform.position + Vector3.up * eyeHeight, hit.point, Color.red);
-                        }
-                    }
-                }
-            */
-
-            //If this is added, the AI will chase the player until it goes behind wall, then it looses intrest
-            //canSeePlayer = false;
+           
 
             Vector3 directionToPlayer = (player.position - transform.position).normalized;
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);

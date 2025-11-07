@@ -9,6 +9,7 @@ TagManager:
   - Threat
   - Floor
   - Collectable
+  - Enemy
   layers:
   - Default
   - TransparentFX
