@@ -103,6 +103,15 @@ namespace  GDD3400.Labyrinth
             _rigidbody.linearVelocity = _moveVector * _MoveSpeed;
         }
 
-        
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("Collision");
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                SceneManager.LoadScene("The Labyrinth");
+            }
+        }
+
+
     }
 }

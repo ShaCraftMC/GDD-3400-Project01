@@ -209,6 +209,14 @@ PrefabInstance:
       propertyPath: _LeavingPathDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4970681683224068256, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276149839566675940, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: m_Name
       value: Enemy Agent (1)
@@ -1108,6 +1116,10 @@ PrefabInstance:
     - target: {fileID: 3555295418026724885, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: _LeavingPathDistance
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276149839566675940, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: m_Name
@@ -4709,6 +4721,10 @@ PrefabInstance:
       propertyPath: _LeavingPathDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6276149839566675940, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: m_Name
       value: Enemy Agent (4)
@@ -7265,6 +7281,10 @@ PrefabInstance:
       propertyPath: _LeavingPathDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6276149839566675940, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: m_Name
       value: Enemy Agent (2)
@@ -7322,6 +7342,34 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+--- !u!1 &1188338009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7508221612277007799, guid: 04ffb3a55646b45c08a751d968ae17ad, type: 3}
+  m_PrefabInstance: {fileID: 6901678001553329611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1188338012
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188338009}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &1190245774 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3927060962204461616, guid: e277d38ffcd6e4b23be0e927a37c8b40, type: 3}
@@ -8080,6 +8128,10 @@ PrefabInstance:
     - target: {fileID: 3555295418026724885, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: _LeavingPathDistance
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276149839566675940, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: m_Name
@@ -9305,6 +9357,95 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4834609997738129301, guid: e5fff6f2b36b8489a825c62c0b418523, type: 3}
   m_PrefabInstance: {fileID: 1618817059}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1639469816
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3555295418026724885, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 50431081}
+    - target: {fileID: 3555295418026724885, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: _MaxSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3555295418026724885, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: _levelManager
+      value: 
+      objectReference: {fileID: 1086999212}
+    - target: {fileID: 3555295418026724885, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: _StoppingDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3555295418026724885, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: _LeavingPathDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276149839566675940, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_Name
+      value: Enemy Agent (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066450295968295882, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
 --- !u!1001 &1650193681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10781,6 +10922,10 @@ PrefabInstance:
       propertyPath: _LeavingPathDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6276149839566675940, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: m_Name
       value: Enemy Agent (7)
@@ -11232,6 +11377,10 @@ PrefabInstance:
     - target: {fileID: 3555295418026724885, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: _LeavingPathDistance
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276149839566675940, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6942046151403193595, guid: 8112c2beccc3b461cb4e8252dcd040fb, type: 3}
       propertyPath: m_Name
@@ -12177,7 +12326,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7508221612277007799, guid: 04ffb3a55646b45c08a751d968ae17ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1188338012}
   m_SourcePrefab: {fileID: 100100000, guid: 04ffb3a55646b45c08a751d968ae17ad, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -12188,6 +12340,7 @@ SceneRoots:
   - {fileID: 6901678001553329611}
   - {fileID: 5343842681741442354}
   - {fileID: 2018825}
+  - {fileID: 1639469816}
   - {fileID: 1942300276}
   - {fileID: 1187035148}
   - {fileID: 1998440217}

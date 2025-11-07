@@ -56,7 +56,9 @@ namespace GDD3400.Labyrinth
 
         //Timer
         public float timeRemaining = 2f;
+        public float timeRemainingTwo = 2f;
         public bool timerIsRunning = false;
+        public bool timerIsRunningTwo = false;
 
         Vector3 lastKnownPosition;
 
@@ -125,22 +127,22 @@ namespace GDD3400.Labyrinth
             }
 
             //Have a timer or Ienumarator that after loosing sight of the player, go to their last position, then go back to wandering
-            /*
+            
             if (timerIsRunningTwo)
             {
-                if (timeRemaining > 0)
+                if (timeRemainingTwo > 0)
                 {
-                    timeRemaining -= Time.deltaTime;
+                    timeRemainingTwo -= Time.deltaTime;
 
                 }
                 else
                 {
 
-                    timeRemaining = 2f;
+                    timeRemainingTwo = 2f;
                     
                 }
             }
-            */
+         
         }
 
         //Decision Making
